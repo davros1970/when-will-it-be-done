@@ -31,7 +31,7 @@ In Agile project management, tracking the progress of epics and estimating proje
 2. **Run the Script:**
    Execute the script by providing the necessary command-line arguments. Here's an example command:
    ```bash
-   python when_will_epic_be_done.py ABC-1234 --story-points-per-sprint 13 --max-developers 3 --exclude ABC-1234 ABC-5678 --base-url <JIRA_BASE_URL> --browse-url <JIRA_BROWSE_URL> --email <JIRA_EMAIL> --api-token <JIRA_API_TOKEN> --sprint-duration 14
+   python when_will_epic_be_done.py ABC-1234 --story-points-per-sprint 13 --max-developers 3 --exclude ABC-4444 ABC-5555 --base-url <JIRA_BASE_URL> --browse-url <JIRA_BROWSE_URL> --email <JIRA_EMAIL> --api-token <JIRA_API_TOKEN> --sprint-duration 14
    ```
 
    - `epic`: The Jira epic ticket name, e.g., ABC-1234.
