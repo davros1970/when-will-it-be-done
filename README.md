@@ -31,10 +31,10 @@ In Agile project management, tracking the progress of epics and estimating proje
 2. **Run the Script:**
    Execute the script by providing the necessary command-line arguments. Here's an example command:
    ```bash
-   python script_name.py AV3-5769 --story-points-per-sprint 13 --max-developers 3 --exclude AV3-1234 AV3-5678 --base-url <JIRA_BASE_URL> --browse-url <JIRA_BROWSE_URL> --email <JIRA_EMAIL> --api-token <JIRA_API_TOKEN> --sprint-duration 14
+   python script_name.py ABC-5769 --story-points-per-sprint 13 --max-developers 3 --exclude ABC-1234 ABC-5678 --base-url <JIRA_BASE_URL> --browse-url <JIRA_BROWSE_URL> --email <JIRA_EMAIL> --api-token <JIRA_API_TOKEN> --sprint-duration 14
    ```
 
-   - `epic`: The Jira epic ticket name, e.g., AV3-5769.
+   - `epic`: The Jira epic ticket name, e.g., ABC-5769.
    - `--story-points-per-sprint`: Number of story points a developer can finish in a 2-week Agile Sprint. Default is 13.
    - `--max-developers`: Maximum number of developers. Default is 1.
    - `--exclude`: List of Jira tickets to exclude from the calculations.
@@ -55,7 +55,7 @@ In Agile project management, tracking the progress of epics and estimating proje
 ## Example Output
 
 ```
-Child Issues within the Epic: ABC-1234 https://mycompany.atlassian.net/browse/AV3-5769
+Child Issues within the Epic: ABC-1234 https://mycompany.atlassian.net/browse/ABC-5769
 Key            Summary                                                        Status                  Story Points    Link
 ABC-2222       Implement login functionality                                  In Progress             5               https://mycompany.atlassian.net/browse/ABC-2222
 ABC-3333       Update user profile page                                       Closed                  3               https://mycompany.atlassian.net/browse/ABC-3333
