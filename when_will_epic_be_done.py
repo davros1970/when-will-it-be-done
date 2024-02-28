@@ -9,12 +9,14 @@ JIRA_FIELD_NAMES = {
     "Key": "key",
     "Summary": "summary",
     "Status": "status",
-    "Story Points": "customfield_10023"  # Adjust field ID and name accordingly
+    "Story Points": "customfield_10023"  # Adjust field ID and name accordingly. Not all Jira instances use the same field names
 }
 
 
 def show_custom_fields():
-    """Call this to dump all the custom fields"""
+    """
+    Call this to dump all the custom fields. In this example, this is how we identified customfield_10023 as our Story Points field.
+    """
     response = requests.get(args.base_url + "field", headers=HEADERS)
 
     if response.status_code == 200:
@@ -53,11 +55,11 @@ if __name__ == "__main__":
                         help='Number of story points a developer can finish in a 2-week Agile Sprint.')
     parser.add_argument('--max-developers', type=int, default=1, help='Maximum number of developers.')
     parser.add_argument('--exclude', nargs='+', default=[],
-                        help='List of Jira tickets to exclude from the calculations, e.g., ABC-5678 ABC-5679')
+                        help='List of Jira tickets (aka: User Stories) in the Epic to exclude from the calculations, e.g., ABC-4444 ABC-5555')
     parser.add_argument('--base-url', required=True,
-                        help='Base URL for Jira API')
+                        help='Base URL for Jira browse links. Required. (e.g. https://mycompany.atlassian.net/browse/). Please ensure the URL ends with /')
     parser.add_argument('--browse-url', required=True,
-                        help='Base URL for Jira browse links')
+                        help='Base URL for Jira REST API. Required. (e.g. https://mycompany.atlassian.net/rest/api/2/)')
     parser.add_argument('--email', help='Jira account email')
     parser.add_argument('--api-token', help='Jira API token')
     parser.add_argument('--sprint-duration', type=int, default=14, nargs='?',
@@ -82,7 +84,7 @@ if __name__ == "__main__":
     print(f"Child Issues within the Epic: {args.epic} {epic_link}")
     print(f"{'Key':<15}{'Summary':<60}{'Status':<25}{'Story Points':<15}{'Link'}")
 
-    open_story_points = 0  # This will hold the sum of story points for tickets not in "Closed" status
+    open_story_points = 0  # This will hold the sum of story points for tickets not in "Closed" or "Done" status
 
     # Loop through each story and display details, skip stories in the exclude list
     for story in stories:
@@ -102,12 +104,12 @@ if __name__ == "__main__":
         if key in args.exclude:
             continue
 
-        if status != "Closed" and story_points:
+        if status != "Closed" and status != "Done" and story_points:
             open_story_points += story_points
 
     # Display total story points and project end dates
     print(f"\nTotal story points for epic {args.epic}: {total_story_points}")
-    print(f"Total story points for tickets that are not 'Closed' and not excluded: {open_story_points}")
+    print(f"Total story points for tickets that are not 'Closed' or 'Done' and not excluded: {open_story_points}")
     print()
     print(f"Excluded tickets: {args.exclude}")
     print()
